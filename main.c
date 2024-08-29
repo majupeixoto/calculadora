@@ -2,7 +2,7 @@
  * Calculadora Programador Didática
  * Autor: Maria Júlia Peixoto Oliveira
  * Data de criação: [21/08/2024]
- * Última atualização: [29/08/2024 e 19:27]
+ * Última atualização: [29/08/2024 às 19:40]
  * GitHub: https://github.com/majupeixoto/calculadora.git
  * 
  * Descrição: Este programa realiza conversões de base 10 para outras bases e representações numéricas, 
@@ -17,6 +17,7 @@
  * - [29/08/2024 às 11:46]: Refinamento da interface.
  * - [29/08/2024 às 18:07]: Criação do cabeçallho, refinamento da interface, otimização dos códigos.
  * - [29/08/2024 às 19:27]: Implementação correta da QUESTÃO UM, com a conversao BCD corrigida.
+ * - [29/08/2024 às 19:40]: Implementação correta da QUESTÃO DOIS, sendo explicada de forma didática como a questão pede.
  */
 
 #include <stdio.h>
@@ -254,34 +255,57 @@ void decimalA2(int numero){
     }
 
     // Convertendo para binário
+    printf("\nRepresentação binária inicial de %d: ", negativo ? -numero : numero);
     for(int i = 15; i >= 0; i--){
         bits[i] = numero % 2;
         numero /= 2;
     }
 
+    // Mostrar a representação binária inicial
+    for(int i = 0; i < 16; i++){
+        if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
+        printf("%d", bits[i]);
+    }
+    printf("\n");
+
     if(negativo){
         // Complemento a 1
+        printf("\nComplemento a 1 (inversão dos bits): ");
         for(int i = 0; i < 16; i++){
             bits[i] = !bits[i];
         }
 
+        // Mostrar o complemento a 1
+        for(int i = 0; i < 16; i++){
+            if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
+            printf("%d", bits[i]);
+        }
+        printf("\n");
+
         // Somando 1
+        printf("\nSomando 1 ao complemento a 1: ");
         for(int i = 15; i >= 0; i--){
             if (bits[i] == 0) {
                 bits[i] = 1;
                 break;
-            }else{
+            } else {
                 bits[i] = 0;
             }
         }
+
+        // Mostrar o resultado final em complemento a 2
+        for(int i = 0; i < 16; i++){
+            if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
+            printf("%d", bits[i]);
+        }
+        printf("\n");
     }
 
-    printf("Representação em complemento a 2 (16 bits): ");
-
+    printf("\nRepresentação em complemento a 2 (16 bits): ");
     for(int i = 0; i < 16; i++){
+        if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
         printf("%d", bits[i]);
     }
-
     printf("\n");
 }
 
