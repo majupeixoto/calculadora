@@ -1,3 +1,23 @@
+/*
+ * Calculadora Programador Didática
+ * Autor: Maria Júlia Peixoto Oliveira
+ * Data de criação: [21/08/2024]
+ * Última atualização: [29/08/2024 e 18:07]
+ * GitHub: https://github.com/majupeixoto/calculadora.git
+ * 
+ * Descrição: Este programa realiza conversões de base 10 para outras bases e representações numéricas, 
+ * mostrando os passos detalhados na tela.
+ *
+ * Revisões/Atualizações:
+ * - [21/08/2024 às 12:10]: Implementação inicial.
+ * - [27/08/2024 às 09:38]: Escrita do README.
+ * - [27/08/2024 às 09:44]: Atualização do README.
+ * - [29/08/2024 às 09:07]: EScrita do menu e esqueleto das funções.
+ * - [29/08/2024 às 11:12]: Implementação de algumas funções. (Implementação da QUESTÃO UM)
+ * - [29/08/2024 às 11:46]: Refinamento da interface.
+ * - [29/08/2024 às 18:07]: Criação do cabeçallho, refinamento da interface, otimização dos códigos.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,6 +50,7 @@ int main(){
         double real;
 
         switch(opcao){
+        //Questçao UM
         case 1:
             printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
@@ -53,13 +74,16 @@ int main(){
             scanf("%d", &numero);
             decimalBCD(numero);
             break;
-        
+
+
+        //Questão Dois
         case 5:
             printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalA2(numero);
             break;
         
+        //Questão Três
         case 6:
             printf("\nDigite um numero real: ");
             scanf("%le", &real);
@@ -89,7 +113,7 @@ void decimalBinario(int numero){
     printf("Conversao de %d para binario:\n", numero);
     printf("Divisoes sucessivas por 2 e coleta dos restos(0 ou 1):\n");
 
-    int binario[32]; // depois explicar pq [32]
+    int binario[32]; //depois explicar pq [32]
     int i = 0;
 
     while(numero > 0){
@@ -109,7 +133,7 @@ void decimalOctal(int numero){
     printf("Conversao de %d para octal:\n", numero);
     printf("Divisoes sucessivas por 8 e coleta dos restos:\n");
 
-    int octal[32];//explicar o pq é [32]
+    int octal[32]; //explicar o pq é [32]
     int i = 0;
 
     while(numero > 0){
@@ -136,10 +160,10 @@ void decimalHexa(int numero){
         int resto = numero % 16;
 
         if(resto < 10){
-            hexadecimal[i] = 48 + resto;
+            hexadecimal[i] = 48 + resto; //Se o resto é menor que 10, ele é convertido diretamente para um caractere numérico ('0' a '9') usando a expressão 48 + resto. O valor 48 é a posição ASCII do caractere '0'.
 
         }else{
-            hexadecimal[i] = 55 + resto;
+            hexadecimal[i] = 55 + resto; //Se o resto está entre 10 e 15, ele é convertido em um caractere hexadecimal ('A' a 'F') usando a expressão 55 + resto. O valor 55 é obtido subtraindo 10 da posição ASCII do caractere 'A' (65 - 10 = 55).
 
         }
 
