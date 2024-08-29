@@ -12,63 +12,66 @@ void realFloatDouble(double real);
 int main(){
     int opcao;
     do{
-        printf("\n ============================ MENU ============================= \n");
+        printf("\n============================= MENU ==============================\n");
         printf("[1] Conversao de numeros decimais para binario; \n");
         printf("[2] Conversao de numeros decimais para octal; \n");
         printf("[3] Conversao de numeros decimais para hexadecimal; \n");
         printf("[4] Conversao de cada digito decimal para seu equivalente BCD; \n");
         printf("[5] Exibe a representacao do numero decimal em complemento a 2; \n");
-        printf("[6] Conversão de numeros reais para suas representacoes float e double; \n");
+        printf("[6] Conversao de numeros reais para suas representacoes float e double; \n");
         printf("[7] Sair; \n");
 
-        printf("Digite a opcao que deseja: ");
+        printf("\n Digite a opcao que deseja: ");
         scanf("%d", &opcao);
+
+        printf("\n================================================================\n");
 
         int numero;
         double real;
 
         switch(opcao){
         case 1:
-            printf("Digite um numero decimal: ");
+            printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalBinario(numero);
             break;
         
         case 2:
-            printf("Digite um numero decimal: ");
+            printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalOctal(numero);
             break;
         
         case 3:
-            printf("Digite um numero decimal: ");
+            printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalHexa(numero);
             break;
         
         case 4:
-            printf("Digite um numero decimal: ");
+            printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalBCD(numero);
             break;
         
         case 5:
-            printf("Digite um numero decimal: ");
+            printf("\nDigite um numero decimal: ");
             scanf("%d", &numero);
             decimalA2(numero);
             break;
         
         case 6:
-            printf("Digite um numero real: ");
+            printf("\nDigite um numero real: ");
             scanf("%le", &real);
             realFloatDouble(real);
             break;
         
         case 7:
-            printf("Saindo...");
+            printf("Saindo...\n");
             break;
 
         default:
+            printf("\nOpcao invalida, tente novamente!\n");
             break;
         }
     }while(opcao != 7);
