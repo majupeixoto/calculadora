@@ -2,7 +2,7 @@
  * Calculadora Programador Didática
  * Autor: Maria Júlia Peixoto Oliveira
  * Data de criação: [21/08/2024]
- * Última atualização: [29/08/2024 e 18:07]
+ * Última atualização: [29/08/2024 e 19:27]
  * GitHub: https://github.com/majupeixoto/calculadora.git
  * 
  * Descrição: Este programa realiza conversões de base 10 para outras bases e representações numéricas, 
@@ -16,6 +16,7 @@
  * - [29/08/2024 às 11:12]: Implementação de algumas funções. (Implementação da QUESTÃO UM)
  * - [29/08/2024 às 11:46]: Refinamento da interface.
  * - [29/08/2024 às 18:07]: Criação do cabeçallho, refinamento da interface, otimização dos códigos.
+ * - [29/08/2024 às 19:27]: Implementação correta da QUESTÃO UM, com a conversao BCD corrigida.
  */
 
 #include <stdio.h>
@@ -52,25 +53,25 @@ int main(){
         switch(opcao){
         //Questçao UM
         case 1:
-            printf("\nDigite um numero decimal: ");
+            printf("\nDigite um numero decimal para converte-lo ao binario: ");
             scanf("%d", &numero);
             decimalBinario(numero);
             break;
         
         case 2:
-            printf("\nDigite um numero decimal: ");
+            printf("\nDigite um numero decimal para converte-lo ao octal: ");
             scanf("%d", &numero);
             decimalOctal(numero);
             break;
         
         case 3:
-            printf("\nDigite um numero decimal: ");
+            printf("\nDigite um numero decimal para converte-lo ao hexadecimal: ");
             scanf("%d", &numero);
             decimalHexa(numero);
             break;
         
         case 4:
-            printf("\nDigite um numero decimal: ");
+            printf("\nDigite um numero decimal para converte-lo ao seu equivalente BCD: ");
             scanf("%d", &numero);
             decimalBCD(numero);
             break;
@@ -78,14 +79,14 @@ int main(){
 
         //Questão Dois
         case 5:
-            printf("\nDigite um numero decimal: ");
+            printf("\nDigite um numero decimal para converte-lo ao complemento a 2: ");
             scanf("%d", &numero);
             decimalA2(numero);
             break;
         
         //Questão Três
         case 6:
-            printf("\nDigite um numero real: ");
+            printf("\nDigite um numero real para converte-lo ao float e ao double: ");
             scanf("%le", &real);
             realFloatDouble(real);
             break;
@@ -172,7 +173,7 @@ void decimalHexa(int numero){
         i++;
     }
 
-    printf("Resultado em hexadecimal: ");
+    printf("Resultado em hexadecimal: Ox");
     for(int j = i - 1; j >= 0; j--){
         printf("%c", hexadecimal[j]);
     }
@@ -180,16 +181,66 @@ void decimalHexa(int numero){
     printf("\n");
 }
 
-void decimalBCD(int numero){
+void decimalBCD(int numero) {
+    if (numero == 0) {
+        printf("Conversao de %d para BCD: 0000\n", numero);
+        return;
+    }
+
     printf("Conversao de %d para BCD:\n", numero);
     printf("Conversao de cada digito para BCD:\n");
 
-    while(numero > 0){
-        int digito = numero % 10;
+    int bcd[16]; // Armazena os dígitos em BCD
+    int i = 0;
 
-        printf("%d: %04d\n", digito, digito); // Exemplo simples de BCD para cada dígito
-        numero /= 10;
+    // Extrai cada dígito do número e armazena no array `bcd`
+    while (numero > 0) {
+        int digito = numero % 10; // Obtém o último dígito do número
+        bcd[i] = digito;
+        numero /= 10; // Remove o último dígito do número
+        i++;
     }
+
+    // Explicação de cada etapa da conversão para BCD
+    printf("\nEtapas da conversao:\n");
+    for (int j = i - 1; j >= 0; j--) {
+        printf("Dígito %d: %d\n", i - j, bcd[j]); // Mostra cada dígito extraído
+        printf("Em binário (4 bits): ");
+
+        // Converte o dígito para binário de 4 bits sem usar o operador `>>`
+        int valor = bcd[j];
+        int bits[4] = {0, 0, 0, 0}; // Array para armazenar os 4 bits
+
+        for (int k = 3; k >= 0; k--) {
+            bits[k] = valor % 2;  // Armazena o bit menos significativo
+            valor /= 2;           // Divide por 2 para preparar o próximo bit
+        }
+
+        for (int k = 0; k < 4; k++) {
+            printf("%d", bits[k]);  // Exibe cada bit em ordem
+        }
+
+        printf("\n");
+    }
+
+    // Exibe o resultado final em BCD
+    printf("\nResultado em BCD (Binário Codificado Decimal): ");
+    for (int j = i - 1; j >= 0; j--) {
+        int valor = bcd[j];
+        int bits[4] = {0, 0, 0, 0}; // Array para armazenar os 4 bits
+
+        for (int k = 3; k >= 0; k--) {
+            bits[k] = valor % 2;  // Armazena o bit menos significativo
+            valor /= 2;           // Divide por 2 para preparar o próximo bit
+        }
+
+        for (int k = 0; k < 4; k++) {
+            printf("%d", bits[k]);  // Exibe cada bit em ordem
+        }
+
+        printf(" ");
+    }
+    printf("\n");
 }
 
 
