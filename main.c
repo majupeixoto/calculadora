@@ -2,7 +2,7 @@
  * Calculadora Programador Didática
  * Autor: Maria Júlia Peixoto Oliveira
  * Data de criação: [21/08/2024]
- * Última atualização: [29/08/2024 às 19:40]
+ * Última atualização: [30/08/2024 às 20:19]
  * GitHub: https://github.com/majupeixoto/calculadora.git
  * 
  * Descrição: Este programa realiza conversões de base 10 para outras bases e representações numéricas, 
@@ -18,11 +18,13 @@
  * - [29/08/2024 às 18:07]: Criação do cabeçallho, refinamento da interface, otimização dos códigos.
  * - [29/08/2024 às 19:27]: Implementação correta da QUESTÃO UM, com a conversao BCD corrigida.
  * - [29/08/2024 às 19:40]: Implementação correta da QUESTÃO DOIS, sendo explicada de forma didática como a questão pede.
+ * - [30/08/2024 às 20:19]: Implementação da QUESTÃO TRÊS
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
 void decimalBinario(int numero);
 void decimalOctal(int numero);
@@ -93,7 +95,7 @@ int main(){
             break;
         
         case 7:
-            printf("Saindo...\n");
+            printf("\nSaindo...\n");
             break;
 
         default:
@@ -106,7 +108,6 @@ int main(){
 }
 
 void decimalBinario(int numero){
-
     if(numero == 0){
         printf("Resultado em binario: 0\n");
         return;
@@ -115,7 +116,7 @@ void decimalBinario(int numero){
     printf("Conversao de %d para binario:\n", numero);
     printf("Divisoes sucessivas por 2 e coleta dos restos(0 ou 1):\n");
 
-    int binario[32]; //depois explicar pq [32]
+    int binario[32];
     int i = 0;
 
     while(numero > 0){
@@ -135,7 +136,7 @@ void decimalOctal(int numero){
     printf("Conversao de %d para octal:\n", numero);
     printf("Divisoes sucessivas por 8 e coleta dos restos:\n");
 
-    int octal[32]; //explicar o pq é [32]
+    int octal[32];
     int i = 0;
 
     while(numero > 0){
@@ -162,10 +163,10 @@ void decimalHexa(int numero){
         int resto = numero % 16;
 
         if(resto < 10){
-            hexadecimal[i] = 48 + resto; //Se o resto é menor que 10, ele é convertido diretamente para um caractere numérico ('0' a '9') usando a expressão 48 + resto. O valor 48 é a posição ASCII do caractere '0'.
+            hexadecimal[i] = 48 + resto;
 
         }else{
-            hexadecimal[i] = 55 + resto; //Se o resto está entre 10 e 15, ele é convertido em um caractere hexadecimal ('A' a 'F') usando a expressão 55 + resto. O valor 55 é obtido subtraindo 10 da posição ASCII do caractere 'A' (65 - 10 = 55).
+            hexadecimal[i] = 55 + resto;
 
         }
 
@@ -202,18 +203,17 @@ void decimalBCD(int numero) {
         i++;
     }
 
-    // Explicação de cada etapa da conversão para BCD
     printf("\nEtapas da conversao:\n");
     for (int j = i - 1; j >= 0; j--) {
-        printf("Dígito %d: %d\n", i - j, bcd[j]); // Mostra cada dígito extraído
-        printf("Em binário (4 bits): ");
+        printf("Digito %d: %d\n", i - j, bcd[j]); // Mostra cada dígito extraído
+        printf("Em binario (4 bits): ");
 
-        // Converte o dígito para binário de 4 bits sem usar o operador `>>`
+        // Converte o dígito para binário de 4 bits
         int valor = bcd[j];
         int bits[4] = {0, 0, 0, 0}; // Array para armazenar os 4 bits
 
         for (int k = 3; k >= 0; k--) {
-            bits[k] = valor % 2;  // Armazena o bit menos significativo
+            bits[k] = valor % 2;
             valor /= 2;           // Divide por 2 para preparar o próximo bit
         }
 
@@ -224,18 +224,17 @@ void decimalBCD(int numero) {
         printf("\n");
     }
 
-    // Exibe o resultado final em BCD
-    printf("\nResultado em BCD (Binário Codificado Decimal): ");
-    for (int j = i - 1; j >= 0; j--) {
+    printf("\nResultado em BCD (Binario Codificado Decimal): ");
+    for(int j = i - 1; j >= 0; j--){
         int valor = bcd[j];
         int bits[4] = {0, 0, 0, 0}; // Array para armazenar os 4 bits
 
-        for (int k = 3; k >= 0; k--) {
-            bits[k] = valor % 2;  // Armazena o bit menos significativo
+        for (int k = 3; k >= 0; k--){
+            bits[k] = valor % 2;
             valor /= 2;           // Divide por 2 para preparar o próximo bit
         }
 
-        for (int k = 0; k < 4; k++) {
+        for(int k = 0; k < 4; k++){
             printf("%d", bits[k]);  // Exibe cada bit em ordem
         }
 
@@ -255,13 +254,13 @@ void decimalA2(int numero){
     }
 
     // Convertendo para binário
-    printf("\nRepresentação binária inicial de %d: ", negativo ? -numero : numero);
+    printf("\nRepresentação binaria inicial de %d: ", negativo ? -numero : numero);
     for(int i = 15; i >= 0; i--){
         bits[i] = numero % 2;
         numero /= 2;
     }
 
-    // Mostrar a representação binária inicial
+    // Mostrar a representação binária
     for(int i = 0; i < 16; i++){
         if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
         printf("%d", bits[i]);
@@ -270,7 +269,7 @@ void decimalA2(int numero){
 
     if(negativo){
         // Complemento a 1
-        printf("\nComplemento a 1 (inversão dos bits): ");
+        printf("\nComplemento a 1 (inversao dos bits): ");
         for(int i = 0; i < 16; i++){
             bits[i] = !bits[i];
         }
@@ -282,7 +281,7 @@ void decimalA2(int numero){
         }
         printf("\n");
 
-        // Somando 1
+        // Somando + 1
         printf("\nSomando 1 ao complemento a 1: ");
         for(int i = 15; i >= 0; i--){
             if (bits[i] == 0) {
@@ -293,7 +292,7 @@ void decimalA2(int numero){
             }
         }
 
-        // Mostrar o resultado final em complemento a 2
+        // Mostrar em complemento a 2
         for(int i = 0; i < 16; i++){
             if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
             printf("%d", bits[i]);
@@ -301,7 +300,7 @@ void decimalA2(int numero){
         printf("\n");
     }
 
-    printf("\nRepresentação em complemento a 2 (16 bits): ");
+    printf("\nRepresentacao em complemento a 2 (16 bits): ");
     for(int i = 0; i < 16; i++){
         if(i > 0 && i % 4 == 0) printf(" "); // Adiciona espaço a cada 4 dígitos
         printf("%d", bits[i]);
@@ -309,6 +308,30 @@ void decimalA2(int numero){
     printf("\n");
 }
 
-void realFloatDouble(double real){
-    /* code */
+void printFloatBits(float numero) {
+    uint32_t bits = *(uint32_t *)&numero;
+
+    printf("\n=== Representacao Float ===\n");
+    printf("Numero: %.7f\n", numero);
+    printf("Sinal: %d\n", (bits >> 31) & 1); // O símbolo ">>" significa que houve um deslocamento de bits para a direita
+    printf("Expoente: %d\n", (bits >> 23) & 0xFF); // Expoente
+    printf("Expoente com vies: %d\n", ((bits >> 23) & 0xFF) - 127); // Expoente com viés
+    printf("Fracao: 0x%06x\n", bits & 0x7FFFFF); // Mantissa
+}
+
+void printDoubleBits(double numero) {
+    uint64_t bits = *(uint64_t *)&numero;
+
+    printf("\n=== Representacao Double ===\n");
+    printf("Numero: %.15lf\n", numero);
+    printf("Sinal: %d\n", (bits >> 63) & 1); // O símbolo ">>" significa que houve um deslocamento de bits para a direita
+    printf("Expoente: %d\n", (bits >> 52) & 0x7FF); // Expoente
+    printf("Expoente com viés: %d\n", ((bits >> 52) & 0x7FF) - 1023); // Expoente com viés
+    printf("Fracao: 0x%013lx\n", bits & 0xFFFFFFFFFFFFF); // Mantissa
+}
+
+void realFloatDouble(double real) {
+    float numeroFloat = (float)real;
+    printFloatBits(numeroFloat);
+    printDoubleBits(real);
 }
