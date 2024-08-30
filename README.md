@@ -33,5 +33,3 @@ Esta computadora didática pode realizar as seguintes operações, com passo a p
 
 - Compilador C(Recomendo GCC).
 - Sistema Operacional compatível com a execução de programas C (Windows, Linux, macOS).
-
-## Como Executar

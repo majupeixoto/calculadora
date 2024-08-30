@@ -2,7 +2,7 @@
  * Calculadora Programador Didática
  * Autor: Maria Júlia Peixoto Oliveira
  * Data de criação: [21/08/2024]
- * Última atualização: [30/08/2024 às 20:19]
+ * Última atualização: [30/08/2024 às 20:37]
  * GitHub: https://github.com/majupeixoto/calculadora.git
  * 
  * Descrição: Este programa realiza conversões de base 10 para outras bases e representações numéricas, 
@@ -19,6 +19,7 @@
  * - [29/08/2024 às 19:27]: Implementação correta da QUESTÃO UM, com a conversao BCD corrigida.
  * - [29/08/2024 às 19:40]: Implementação correta da QUESTÃO DOIS, sendo explicada de forma didática como a questão pede.
  * - [30/08/2024 às 20:19]: Implementação da QUESTÃO TRÊS
+ * - [30/08/2024 às 20:37]: Mudança de main.c para mjpo.c e retirar o .exe do .gitignore
  */
 
 #include <stdio.h>
